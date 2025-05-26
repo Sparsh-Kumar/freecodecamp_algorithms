@@ -7,7 +7,6 @@
 // If 'n' = number of nodes and 'e' = number of edges
 // then Time Complexity = O(e), Space Complexity = O(n)
 
-// In progress
 
 const DepthFirstTraversal = (graph = null, startNode = null, visited = null) => {
   if (!graph || !startNode) return -1;
