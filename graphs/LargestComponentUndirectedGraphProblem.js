@@ -12,22 +12,24 @@
 const DepthFirstTraversal = (graph = null, startNode = null, visited = null) => {
   if (!graph || !startNode) return -1;
   if (!visited) visited = new Set();
+  if (visited.has(startNode)) return 0;
+  visited.add(startNode);
+  let componentLength = 1;
   const stack = [ startNode ];
   const current = stack.pop();
-  if (visited.has(String(current))) return false;
-  visited.add(String(current));
   for (let neighbour of graph[current]) {
-    DepthFirstTraversal(graph, neighbour, visited);
+    componentLength += DepthFirstTraversal(graph, neighbour, visited);
   }
-  return visited.size;
+  return componentLength;
 }
 
 const LargestComponent = (graph = null) => {
   if (!graph) return -1;
-  let largest = -Infinity;
-  for (let key in graph)
-    console.log(DepthFirstTraversal(graph, key))
-  return largest;
+  let largestComponent = -Infinity;
+  for (let key in graph) {
+    largestComponent = Math.max(largestComponent, DepthFirstTraversal(graph, key));
+  }
+  return largestComponent;
 };
 
 const main = () => {
